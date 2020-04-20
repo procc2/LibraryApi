@@ -13,7 +13,7 @@ module.exports = {
     });
   },
   detail: (req, res) => {
-    let sql = "SELECT * FROM products WHERE id = ?";
+    let sql = "SELECT * FROM products WHERE id_ap = ?";
     db.query(sql, [req.params.productId], (err, response) => {
       if (err) throw err;
       res.json(response[0]);
