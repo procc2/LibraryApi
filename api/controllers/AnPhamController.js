@@ -6,7 +6,16 @@ const db = require("../db");
 
 module.exports = {
   get: (req, res) => {
-    let sql = "SELECT * FROM anpham";
+    let sql = "SELECT * FROM anpham WHERE 1 = 1";
+    if(req.query.special != null){
+      sql += " and dac_biet = 1";
+    }
+    if(req.query.recent != null){
+      sql += " order by ngay_muon DESC";
+    }
+    if(req.query.limit){
+      sql += " limit "+ req.query.limit;
+    }
     db.query(sql, (err, response) => {
       if (err) throw err;
       res.json(response);
